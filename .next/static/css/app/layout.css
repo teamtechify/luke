@@ -1117,6 +1117,48 @@ body {
   border-color: var(--golf-success);
   color: var(--golf-paper);
 }
+@layer base {
+  input:not([type="file"]),
+  textarea,
+  select {
+    background: var(--golf-input-bg-default) !important;
+    color: var(--golf-ink);
+    border: 1px solid var(--golf-border);
+    @supports (color: color-mix(in lab, red, red)) {
+      border: 1px solid color-mix(in oklab, var(--golf-border) 60%, transparent);
+    }
+    border-radius: .5rem;
+    transition: background-color .2s ease, box-shadow .2s ease, border-color .2s ease;
+    appearance: none;
+    background-clip: padding-box;
+  }
+  input:not([type="file"]):focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    background: var(--golf-input-bg-focus) !important;
+    border-color: var(--golf-accent);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--golf-accent) 70%, transparent);
+    }
+    box-shadow: 0 0 0 3px var(--golf-accent);
+    @supports (color: color-mix(in lab, red, red)) {
+      box-shadow: 0 0 0 3px color-mix(in oklab, var(--golf-accent) 20%, transparent);
+    }
+  }
+  input:not([type="file"]):not(:placeholder-shown),
+  textarea:not(:placeholder-shown),
+  select:has(option:checked) {
+    background: var(--golf-input-bg-focus) !important;
+  }
+  input:-webkit-autofill,
+  textarea:-webkit-autofill,
+  select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px var(--golf-input-bg-focus) inset !important;
+    -webkit-text-fill-color: var(--golf-ink) !important;
+    transition: background-color 9999s ease-out 0s;
+  }
+}
 .golf-select {
   background: var(--golf-paper);
   @supports (color: color-mix(in lab, red, red)) {
@@ -1300,14 +1342,8 @@ body {
 .golf-complete .status,
 [data-state="complete"] .status,
 [data-status="complete"] .status,
-[data-complete="true"] .status,
-.golf-complete [class*="status"],
-[data-state="complete"] [class*="status"],
-[data-status="complete"] [class*="status"],
-[data-complete="true"] [class*="status"] {
-  color: #ffffff !important;
-  fill: #ffffff !important;
-  stroke: #ffffff !important;
+[data-complete="true"] .status {
+  color: var(--golf-green-light) !important;
 }
 .golf-complete::before,
 [data-state="complete"]::before,
@@ -1316,18 +1352,8 @@ body {
 .golf-complete .left-accent,
 [data-state="complete"] .left-accent,
 [data-status="complete"] .left-accent,
-[data-complete="true"] .left-accent,
-.golf-complete .border-l,
-[data-state="complete"] .border-l,
-[data-status="complete"] .border-l,
-[data-complete="true"] .border-l,
-.golf-complete [class*="border-l-"],
-[data-state="complete"] [class*="border-l-"],
-[data-status="complete"] [class*="border-l-"],
-[data-complete="true"] [class*="border-l-"] {
-  background-color: #ffffff !important;
-  border-left-color: #ffffff !important;
-  box-shadow: inset 4px 0 0 #ffffff !important;
+[data-complete="true"] .left-accent {
+  background-color: var(--golf-green-light) !important;
 }
 @property --tw-translate-x {
   syntax: "*";
