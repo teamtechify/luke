@@ -20,7 +20,7 @@
   --golf-success: #6a9739; /* success green */
   /* Input field backgrounds */
   --golf-input-bg-default: #eaf4e6; /* pale green default background */
-  --golf-input-bg-focus: #f0f8ec; /* lighter green for focus/completion */
+  --golf-input-bg-focus:   #f0f8ec; /* slightly lighter green for focus/completion */
 }
 
 @theme inline {
@@ -89,8 +89,7 @@ body {
 
 /* Refined button style (golf club elegance) */
 .golf-pill-btn {
-  background:
-    linear-gradient(135deg, 
+  background: linear-gradient(135deg, 
       color-mix(in oklab, var(--golf-accent) 95%, var(--golf-paper)) 0%,
       color-mix(in oklab, var(--golf-accent) 85%, var(--golf-accent-2)) 50%,
       color-mix(in oklab, var(--golf-accent-2) 90%, black) 100%
@@ -118,8 +117,7 @@ body {
 
 .golf-pill-btn:hover,
 .golf-pill-btn:focus-visible {
-  background:
-    linear-gradient(135deg, 
+  background: linear-gradient(135deg, 
       color-mix(in oklab, var(--golf-accent) 98%, var(--golf-paper)) 0%,
       color-mix(in oklab, var(--golf-accent) 90%, var(--golf-accent-2)) 50%,
       color-mix(in oklab, var(--golf-accent-2) 95%, black) 100%
@@ -170,7 +168,7 @@ body {
   border-color: color-mix(in oklab, var(--golf-accent-2) 70%, transparent);
 }
 
-/* When a section is completed, highlight with success green (inputs focus ring only) */
+/* When a section is completed, highlight with success green */
 .golf-complete input:focus,
 .golf-complete textarea:focus,
 .golf-complete select:focus,
@@ -185,6 +183,44 @@ body {
   background: color-mix(in oklab, var(--golf-success) 85%, var(--golf-paper));
   border-color: var(--golf-success);
   color: var(--golf-paper);
+}
+
+/* === Input theming (brand green) === */
+@layer base {
+  input:not([type="file"]),
+  textarea,
+  select {
+    background: var(--golf-input-bg-default) !important;
+    color: var(--golf-ink);
+    border: 1px solid color-mix(in oklab, var(--golf-border) 60%, transparent);
+    border-radius: .5rem;
+    transition: background-color .2s ease, box-shadow .2s ease, border-color .2s ease;
+    appearance: none;
+    background-clip: padding-box;
+  }
+
+  input:not([type="file"]):focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    background: var(--golf-input-bg-focus) !important;
+    border-color: color-mix(in oklab, var(--golf-accent) 70%, transparent);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--golf-accent) 20%, transparent);
+  }
+
+  input:not([type="file"]):not(:placeholder-shown),
+  textarea:not(:placeholder-shown),
+  select:has(option:checked) {
+    background: var(--golf-input-bg-focus) !important;
+  }
+
+  input:-webkit-autofill,
+  textarea:-webkit-autofill,
+  select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px var(--golf-input-bg-focus) inset !important;
+    -webkit-text-fill-color: var(--golf-ink) !important;
+    transition: background-color 9999s ease-out 0s;
+  }
 }
 
 /* Elegant select styling */
@@ -296,19 +332,14 @@ body {
   box-shadow: 0 0 0 3px color-mix(in oklab, var(--golf-accent) 20%, transparent) !important;
 }
 
-/* =========================================================
-   COMPLETED STATE FIXES (keep dark green; white accents)
-   ========================================================= */
-
-/* Keep the entire section/card dark when marked complete */
+/* === Force completed sections to keep same dark bg === */
 .golf-complete,
 [data-state="complete"],
 [data-status="complete"],
 [data-complete="true"] {
-  background: #1c2c19 !important; /* dark card bg */
+  background: #1c2c19 !important; /* lock to dark card bg */
 }
 
-/* Disable any pale overlay that might wash it out */
 .golf-complete .golf-card-overlay,
 [data-state="complete"] .golf-card-overlay,
 [data-status="complete"] .golf-card-overlay,
@@ -316,7 +347,7 @@ body {
   opacity: 0 !important;
 }
 
-/* Inputs inside completed sections: keep the same pale input bg */
+/* Inputs inside completed sections: keep normal input bg */
 .golf-complete input,
 .golf-complete textarea,
 .golf-complete select,
@@ -326,21 +357,16 @@ body {
   background: var(--golf-input-bg-default, #eaf4e6) !important;
 }
 
-/* Completed accents: make the right "Completed" label WHITE */
+/* === Completed state accents (lighter green) === */
+/* Right-side "Completed" label */
 .golf-complete .status,
 [data-state="complete"] .status,
 [data-status="complete"] .status,
-[data-complete="true"] .status,
-.golf-complete [class*="status"],
-[data-state="complete"] [class*="status"],
-[data-status="complete"] [class*="status"],
-[data-complete="true"] [class*="status"] {
-  color: #ffffff !important;
-  fill: #ffffff !important;   /* for SVG icons next to text */
-  stroke: #ffffff !important;
+[data-complete="true"] .status {
+  color: var(--golf-green-light) !important; /* #6a9739 */
 }
 
-/* Completed accents: make the thin left bar WHITE (handles ::before & helpers) */
+/* Left vertical accent bar (often a ::before on the section) */
 .golf-complete::before,
 [data-state="complete"]::before,
 [data-status="complete"]::before,
@@ -348,16 +374,6 @@ body {
 .golf-complete .left-accent,
 [data-state="complete"] .left-accent,
 [data-status="complete"] .left-accent,
-[data-complete="true"] .left-accent,
-.golf-complete .border-l,
-[data-state="complete"] .border-l,
-[data-status="complete"] .border-l,
-[data-complete="true"] .border-l,
-.golf-complete [class*="border-l-"],
-[data-state="complete"] [class*="border-l-"],
-[data-status="complete"] [class*="border-l-"],
-[data-complete="true"] [class*="border-l-"] {
-  background-color: #ffffff !important;
-  border-left-color: #ffffff !important;
-  box-shadow: inset 4px 0 0 #ffffff !important; /* fallback if bar uses shadow */
+[data-complete="true"] .left-accent {
+  background-color: var(--golf-green-light) !important; /* #6a9739 */
 }
