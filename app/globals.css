@@ -1,0 +1,299 @@
+@import "tailwindcss";
+
+:root {
+  /* Golf course inspired palette - refined and elegant */
+  --golf-ink: #1a3c2a; /* deep forest green for text */
+  --golf-paper: #fefef9; /* cream white paper */
+  --golf-accent: #c8a882; /* warm sand/bunker beige */
+  --golf-border: #d4d4aa; /* sage green border */
+  --golf-accent-2: #8b7355; /* darker sand */
+  --golf-bg-base: #f8f9f0; /* very light sage base */
+  /* Primary golf course greens */
+  --golf-green: #1c2c19; /* dark green */
+  --golf-green-2: #4a7c2a; /* medium green */
+  --golf-green-light: #6a9739; /* lighter green */
+  --golf-green-base: #1a2e0f; /* darkest green base */
+  /* Card gradient anchors (forest green → warm sand) */
+  --golf-card-from: #1c2c19; /* dark forest green */
+  --golf-card-to: #c8a882;   /* warm sand beige */
+  --golf-water: #4a6b8a; /* water hazard blue */
+  --golf-success: #6a9739; /* success green */
+  /* Input field backgrounds */
+  --golf-input-bg-default: #eaf4e6; /* pale green default background */
+  --golf-input-bg-focus: #f0f8ec; /* lighter green for focus/completion */
+}
+
+@theme inline {
+  --color-golf-ink: var(--golf-ink);
+  --color-golf-paper: var(--golf-paper);
+  --color-golf-accent: var(--golf-accent);
+  --color-golf-border: var(--golf-border);
+  --color-golf-green: var(--golf-green);
+  --color-golf-green-2: var(--golf-green-2);
+  --color-golf-water: var(--golf-water);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-display: var(--font-display);
+}
+
+html, body { min-height: 100%; }
+
+body {
+  background: #1c2c19;
+  color: var(--golf-ink);
+  font-family: var(--font-sans), Georgia, serif;
+}
+
+/* Simple solid green background */
+.golf-course-bg {
+  background: #1c2c19;
+}
+
+/* Elegant card styling with golf club house inspiration */
+.golf-card-gradient {
+  background:
+    #1c2c19;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  border: 1px solid color-mix(in oklab, var(--golf-accent) 40%, transparent);
+  box-shadow: 
+    0 4px 20px color-mix(in oklab, var(--golf-green-base) 15%, transparent),
+    inset 0 1px 0 color-mix(in oklab, var(--golf-paper) 10%, transparent);
+}
+
+/* Closed card background (clubhouse at rest) */
+.golf-card-base {
+  background:
+    #1c2c19;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  border: 1px solid color-mix(in oklab, var(--golf-accent) 30%, transparent);
+  box-shadow: 0 4px 15px color-mix(in oklab, var(--golf-green-base) 15%, transparent);
+}
+
+.golf-card-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 400ms ease;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--golf-success) 8%, var(--golf-paper)) 0%,
+    color-mix(in oklab, var(--golf-success) 12%, var(--golf-paper)) 100%
+  );
+  border: 1px solid color-mix(in oklab, var(--golf-success) 30%, transparent);
+}
+
+.golf-card-foreground { position: relative; z-index: 0; }
+
+/* Refined button style (golf club elegance) */
+.golf-pill-btn {
+  background:
+    linear-gradient(135deg, 
+      color-mix(in oklab, var(--golf-accent) 95%, var(--golf-paper)) 0%,
+      color-mix(in oklab, var(--golf-accent) 85%, var(--golf-accent-2)) 50%,
+      color-mix(in oklab, var(--golf-accent-2) 90%, black) 100%
+    );
+  border: 2px solid color-mix(in oklab, var(--golf-accent) 60%, var(--golf-paper));
+  color: var(--golf-ink);
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  transition: all 200ms ease;
+  box-shadow: 
+    0 2px 8px color-mix(in oklab, var(--golf-green-base) 20%, transparent),
+    inset 0 1px 0 color-mix(in oklab, var(--golf-paper) 30%, transparent);
+}
+
+.golf-pill-label {
+  transition: color 200ms ease, opacity 200ms ease;
+}
+
+.golf-pill-btn:hover,
+.golf-pill-btn:focus-visible {
+  background:
+    linear-gradient(135deg, 
+      color-mix(in oklab, var(--golf-accent) 98%, var(--golf-paper)) 0%,
+      color-mix(in oklab, var(--golf-accent) 90%, var(--golf-accent-2)) 50%,
+      color-mix(in oklab, var(--golf-accent-2) 95%, black) 100%
+    );
+  border-color: color-mix(in oklab, var(--golf-accent) 80%, var(--golf-paper));
+  box-shadow: 
+    0 4px 12px color-mix(in oklab, var(--golf-green-base) 30%, transparent),
+    inset 0 1px 0 color-mix(in oklab, var(--golf-paper) 40%, transparent);
+}
+
+.golf-pill-btn:hover .golf-pill-label,
+.golf-pill-btn:focus-visible .golf-pill-label,
+.golf-pill-btn:active .golf-pill-label { 
+  color: color-mix(in oklab, var(--golf-accent-2) 90%, black); 
+}
+
+/* Refined file input styling */
+.golf-file input[type="file"] {
+  background: color-mix(in oklab, var(--golf-paper) 92%, var(--golf-green));
+  color: var(--golf-ink);
+  border: 1px solid color-mix(in oklab, var(--golf-border) 60%, transparent);
+  border-radius: .5rem;
+  padding: .5rem .75rem;
+  width: 100%;
+  transition: all 200ms ease;
+}
+
+.golf-file input[type="file"]:hover {
+  background: color-mix(in oklab, var(--golf-paper) 95%, var(--golf-green));
+  border-color: color-mix(in oklab, var(--golf-accent) 60%, transparent);
+}
+
+.golf-file input[type="file"]::file-selector-button {
+  background: color-mix(in oklab, var(--golf-accent) 85%, var(--golf-paper));
+  border: 1px solid color-mix(in oklab, var(--golf-accent) 60%, transparent);
+  color: var(--golf-ink);
+  border-radius: .375rem;
+  padding: .4rem .8rem;
+  margin-right: .75rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 200ms ease;
+}
+
+.golf-file input[type="file"]:focus-visible::file-selector-button,
+.golf-file input[type="file"]:active::file-selector-button { 
+  background: color-mix(in oklab, var(--golf-accent) 90%, var(--golf-paper));
+  border-color: color-mix(in oklab, var(--golf-accent-2) 70%, transparent);
+}
+
+/* When a section is completed, highlight with success green */
+.golf-complete input:focus,
+.golf-complete textarea:focus,
+.golf-complete select:focus,
+.golf-complete .PhoneInput input:focus {
+  outline: none !important;
+  border-color: color-mix(in oklab, var(--golf-success) 70%, var(--golf-paper)) !important;
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--golf-success) 25%, transparent) !important;
+}
+
+.golf-complete .golf-file input[type="file"]:focus-visible::file-selector-button,
+.golf-complete .golf-file input[type="file"]:active::file-selector-button { 
+  background: color-mix(in oklab, var(--golf-success) 85%, var(--golf-paper));
+  border-color: var(--golf-success);
+  color: var(--golf-paper);
+}
+
+/* Elegant select styling */
+.golf-select {
+  background: color-mix(in oklab, var(--golf-paper) 92%, var(--golf-green));
+  color: var(--golf-ink);
+  border: 1px solid color-mix(in oklab, var(--golf-border) 60%, transparent);
+  transition: all 200ms ease;
+}
+
+.golf-select:focus { 
+  outline: none;
+  border-color: color-mix(in oklab, var(--golf-accent) 70%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--golf-accent) 20%, transparent);
+}
+
+.golf-select option { 
+  background: var(--golf-paper); 
+  color: var(--golf-ink); 
+}
+
+/* Phone input styling to match golf theme */
+.PhoneInputCountrySelect {
+  background: color-mix(in oklab, var(--golf-paper) 92%, var(--golf-green)) !important;
+  color: var(--golf-ink) !important;
+  border: 1px solid color-mix(in oklab, var(--golf-border) 60%, transparent) !important;
+  transition: all 200ms ease !important;
+}
+
+.PhoneInputCountrySelect:focus { 
+  outline: none !important;
+  border-color: color-mix(in oklab, var(--golf-accent) 70%, transparent) !important;
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--golf-accent) 20%, transparent) !important;
+}
+
+.PhoneInputCountrySelect option { 
+  background: var(--golf-paper); 
+  color: var(--golf-ink); 
+}
+
+.golf-file input[type="file"]:focus { 
+  outline: none;
+  border-color: color-mix(in oklab, var(--golf-accent) 70%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--golf-accent) 20%, transparent);
+}
+
+/* react-phone-input-2 golf styling */
+.react-tel-input { width: 100%; }
+
+.react-tel-input .form-control {
+  background: color-mix(in oklab, var(--golf-paper) 92%, var(--golf-green)) !important;
+  color: var(--golf-ink) !important;
+  border: 1px solid color-mix(in oklab, var(--golf-border) 60%, transparent) !important;
+  border-radius: .5rem !important;
+  width: 100% !important;
+  height: 44px !important;
+  padding: .5rem .75rem .5rem 3.25rem !important;
+  transition: all 200ms ease !important;
+}
+
+.react-tel-input .selected-flag {
+  background: color-mix(in oklab, var(--golf-paper) 92%, var(--golf-green)) !important;
+  border-right: 1px solid color-mix(in oklab, var(--golf-border) 40%, transparent) !important;
+  border-top-left-radius: .5rem !important;
+  border-bottom-left-radius: .5rem !important;
+}
+
+.react-tel-input .flag-dropdown { 
+  background: color-mix(in oklab, var(--golf-paper) 92%, var(--golf-green)) !important; 
+  border: 1px solid color-mix(in oklab, var(--golf-border) 60%, transparent) !important; 
+  border-right: none !important; 
+}
+
+.react-tel-input .country-list {
+  background: var(--golf-paper) !important;
+  color: var(--golf-ink) !important;
+  border: 1px solid color-mix(in oklab, var(--golf-border) 60%, transparent) !important;
+  border-radius: .5rem !important;
+  box-shadow: 0 10px 40px color-mix(in oklab, var(--golf-green-base) 25%, transparent) !important;
+  max-height: 260px !important;
+  z-index: 40 !important;
+}
+
+.react-tel-input .country-list .search-box {
+  background: color-mix(in oklab, var(--golf-paper) 95%, var(--golf-green)) !important;
+  border: 1px solid color-mix(in oklab, var(--golf-border) 50%, transparent) !important;
+  color: var(--golf-ink) !important;
+}
+
+.golf-phone-search { 
+  width: calc(100% - 1rem) !important; 
+  margin: .5rem !important; 
+  padding: .4rem .6rem !important; 
+  border-radius: .375rem !important; 
+}
+
+.react-tel-input .country-list .country:hover { 
+  background: color-mix(in oklab, var(--golf-accent) 15%, var(--golf-paper)) !important; 
+}
+
+.react-tel-input.separate-dial-code .selected-flag .dial-code { 
+  color: var(--golf-ink) !important; 
+  opacity: .75; 
+}
+
+.react-tel-input .form-control:focus { 
+  outline: none !important; 
+  border-color: color-mix(in oklab, var(--golf-accent) 70%, transparent) !important;
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--golf-accent) 20%, transparent) !important;
+}
