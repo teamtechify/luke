@@ -62,7 +62,7 @@ const AccordionSection = ({ index, title, subtitle, open, completed, onToggle, c
       style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
     >
       <div className="overflow-hidden golf-card-foreground">
-        <div className="p-5 md:p-7 space-y-6">{children}</div>
+        <div className="p-5 md:p-7 space-y-6 text-xl md:text-2xl">{children}</div>
       </div>
     </div>
     {/* Success overlay when completed and open */}
@@ -453,7 +453,7 @@ export default function OnboardingPage() {
            <h1 className="mt-0 text-3xl md:text-5xl font-bold tracking-tight" style={{ fontFamily: 'var(--font-display)', color: '#1c2c19' }}>
               Member Onboarding
             </h1>
-           <p className="mt-3 max-w-3xl mx-auto text-sm md:text-base opacity-90" style={{ color: '#1c2c19' }}>
+           <p className="mt-3 max-w-3xl mx-auto text-lg md:text-xl opacity-90" style={{ color: '#1c2c19' }}>
               Welcome to Bird Valley Golf Course. Please provide the details below to complete your exclusive member onboarding process.
             </p>
           </header>
