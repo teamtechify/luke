@@ -753,14 +753,10 @@ export default function OnboardingPage() {
             </button>
             <button
               type="button"
-              className="px-4 py-2.5 text-sm md:text-base rounded-full border opacity-90 hover:opacity-100 transition-all duration-200"
-              style={{
-                borderColor: 'color-mix(in oklab, var(--golf-border) 60%, transparent)',
-                backgroundColor: 'color-mix(in oklab, var(--golf-paper) 10%, transparent)',
-              }}
+              className="golf-pill-btn px-4 py-2.5 text-sm md:text-base"
               onClick={clearAllFiles}
             >
-              Remove all files
+              <span className="golf-pill-label">Remove all files</span>
             </button>
             {success ? <span className="text-sm" style={{ color: 'var(--golf-success)' }}>{success}</span> : null}
             {error ? <span className="text-sm" style={{ color: 'var(--golf-accent-2)' }}>{error}</span> : null}
