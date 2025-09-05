@@ -72,10 +72,10 @@ const AccordionSection = ({ index, title, subtitle, open, completed, onToggle, c
 
 const Field = ({ label, hint, required, children }: { label: string; hint?: string; required?: boolean; children: React.ReactNode }) => (
   <div className="space-y-2">
-    <label className="block text-sm font-medium">
+    <label className="block text-lg font-medium">
       {label} {required ? <span style={{ color: 'var(--golf-accent-2)' }}>*</span> : null}
     </label>
-     {hint ? <p className="text-xs opacity-70">{hint}</p> : null}
+     {hint ? <p className="text-sm opacity-70">{hint}</p> : null}
     {children}
   </div>
 );
@@ -508,7 +508,7 @@ export default function OnboardingPage() {
               </Field>
                <Field label="Instagram Handle" required>
                  <div className="relative">
-                   <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 opacity-60">@</span>
+                   <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2" style={{ color: '#000' }}>@</span>
                    <input
                      name="instagram"
                      value={values.instagram}
@@ -519,7 +519,7 @@ export default function OnboardingPage() {
                      }}
                      placeholder="yourbrand"
                       required
-                      className="w-full rounded-lg border bg-golf-paper/95 px-7 py-2 text-sm md:text-base transition-all duration-200"
+                     className="w-full rounded-lg border bg-golf-paper/95 pl-8 pr-3 py-2 text-sm md:text-base transition-all duration-200"
                       style={{
                         borderColor: 'color-mix(in oklab, var(--golf-border) 60%, transparent)',
                         color: 'var(--golf-ink)',
